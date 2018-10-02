@@ -546,7 +546,7 @@ private:
     static void ProcessCommand(cell playerid, const char *cmdtext) {
         if (
             !cmdtext
-            || cmdtext[0] != '/'
+            || !std::strlen(cmdtext)
         ) {
             return;
         }
@@ -593,6 +593,10 @@ private:
                 if (retval == 1) {
                     break;
                 }
+            }
+
+            if (cmdtext[0] != '/') {
+                continue;
             }
 
             if (command_exists = ((iter_cmd = script.cmds.find(cmd)) != script.cmds.end())) {
